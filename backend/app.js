@@ -18,8 +18,12 @@ const saveFile = (fileName, data) => {
 
 app.post("/data", (req, res) => {
   try {
-    const { text } = req.body;
-    const fileName = text.split(" ")[0];
+    const { title, text } = req.body;
+    if (!title) {
+      res.status(400).send({ error: "Title is required" });
+      return;
+    }
+    const fileName = title;
     saveFile(fileName, text);
     fs.appendFileSync(
       `${logsDirectory}/logs.txt`,
