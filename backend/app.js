@@ -6,6 +6,13 @@ const { json } = require("express");
 const app = express();
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+  next();
+})
+
 const logsDirectory = process.env.LOGS_DIRECTORY || "./storage/logs";
 if (!fs.existsSync(logsDirectory)) {
   fs.mkdirSync(logsDirectory);
@@ -16,7 +23,7 @@ const saveFile = (fileName, data) => {
   fs.writeFileSync(filePath, data);
 };
 
-app.post("/data", (req, res) => {
+app.post("/api/data", (req, res) => {
   try {
     const { title, text } = req.body;
     if (!title) {
@@ -39,7 +46,7 @@ app.post("/data", (req, res) => {
   }
 });
 
-app.get("/data", (req, res) => {
+app.get("/api/data", (req, res) => {
   try {
     const filesDirectory = process.env.FILES_DIRECTORY || "./storage/data";
     const files = fs
