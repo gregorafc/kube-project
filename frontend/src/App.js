@@ -9,7 +9,7 @@ function App() {
 
   const fetchFiles = useCallback(function () {
   //  fetch(`${process.env.REACT_APP_BACKEND_URL}/data`)
-    fetch("http://localhost:3000/api/data")
+    fetch("/api/data")
       .then(function (response) {
         return response.json();
       })
@@ -35,7 +35,7 @@ function App() {
 
   function handleSaveFile() {
     //fetch(`${process.env.REACT_APP_BACKEND_URL}/data`, {
-    fetch("http://localhost:3000/api/data", {
+    fetch("/api/data", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
