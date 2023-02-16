@@ -18,6 +18,11 @@ if (!fs.existsSync(logsDirectory)) {
   fs.mkdirSync(logsDirectory);
 }
 
+const storageDirectory = process.env.FILES_DIRECTORY || "./storage/data";
+if (!fs.existsSync(storageDirectory)) {
+  fs.mkdirSync(storageDirectory);
+}
+
 const saveFile = (fileName, data) => {
   const filePath = `${process.env.FILES_DIRECTORY || "./storage/data"}/${fileName}.txt`;
   fs.writeFileSync(filePath, data);
