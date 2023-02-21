@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-job
+spec:
+  schedule: "57 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: backup-job
+              image: gregorafc/kube-project-backup:1.0
+              volumeMounts:
+                - mountPath: /app/storage
+                  name: backend-data-volume
+                - mountPath: /app/archive
+                  name: backend-data-volume
+          restartPolicy: OnFailure
+          volumes:
+            - name: backend-data-volume
+              persistentVolumeClaim:
+                claimName: backend-pvc
