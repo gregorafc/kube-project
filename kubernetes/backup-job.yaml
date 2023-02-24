@@ -3,7 +3,11 @@ kind: CronJob
 metadata:
   name: backup-job
 spec:
-  schedule: "57 * * * *"
+  schedule: "*/2 * * * *"
+ #schedule: "0 2 * * *" every day at 2:00
+ #schedule: "0 5 * * 1-5" from Mon to Fri at 5:00
+  successfulJobsHistoryLimit: 20
+  failedJobsHistoryLimit: 20
   jobTemplate:
     spec:
       template:
