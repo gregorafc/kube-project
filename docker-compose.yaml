@@ -4,9 +4,15 @@ services:
     build: ./backend
     ports: 
       - "3000:3000"
+    environment:
+      - "BACKEND_POD_NAME=Backend POD"
+      - "BACKEND_NODE_NAME=Backend NODE"
   frontend:
     build: ./frontend
     ports: 
       - "80:80"
+    environment:
+      - "FRONTEND_POD_NAME=Frontend POD"
+      - "FRONTEND_NODE_NAME=Frontend NODE"
 
     
