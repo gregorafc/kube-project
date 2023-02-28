@@ -18,6 +18,15 @@ spec:
           volumeMounts:
             - mountPath: /app/storage
               name: backend-data-volume
+          env:
+            - name: BACKEND_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: BACKEND_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
       volumes:
         - name: backend-data-volume
           persistentVolumeClaim:

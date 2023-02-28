@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: frontend-deployment
 spec:
-  replicas: 1
+  replicas: 3
   selector: 
     matchLabels:
       app: frontend
@@ -19,6 +19,15 @@ spec:
             - mountPath: /etc/nginx/conf.d
               readOnly: true
               name: nginx-conf
+          env:
+            - name: FRONTEND_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: FRONTEND_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
       volumes:
         - name: nginx-conf
           configMap:
