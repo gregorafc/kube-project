@@ -68,6 +68,13 @@ app.get("/api/data", (req, res) => {
   }
 });
 
+app.get('/api/authors', (req, res) => {
+  const backendPodName = process.env.BACKEND_POD_NAME || 'undefined';
+  const backendNodeName = process.env.BACKEND_NODE_NAME || 'undefined';
+  const data = { backendPodName, backendNodeName };
+  res.json(data);
+});
+
 app.listen(3000, () => {
   console.log("API listening on port 3000");
 });
