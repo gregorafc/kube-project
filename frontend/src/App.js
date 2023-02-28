@@ -6,6 +6,8 @@ function App() {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [files, setFiles] = useState([]);
+  const [backendPodName, setBackendPodName] = useState('');
+  const [backendNodeName, setBackendNodeName] = useState('');
 
   const fetchFiles = useCallback(function () {
   //  fetch(`${process.env.REACT_APP_BACKEND_URL}/data`)
@@ -24,6 +26,14 @@ function App() {
     },
     [fetchFiles]
   );
+
+  const fetchAuthors = async () => {
+    const response = await fetch('/api/authors');
+    const data = await response.json();
+    setBackendPodName(data.backendPodName || 'undefined');
+    setBackendNodeName(data.backendNodeName || 'undefined');
+  };
+
 
   function handleTitleChange(event) {
     setTitle(event.target.value);
@@ -72,6 +82,15 @@ function App() {
             <li key={file}>{file}</li>
           ))}
         </ul>
+      </section>
+      <section>
+        <div>
+          <button onClick={fetchAuthors}>Fetch authors</button>
+          <div>Backend Pod Name: {backendPodName}</div>
+          <div>Backend Node Name: {backendNodeName}</div>
+          <div>Frontend Pod Name: {window._env_.FRONTEND_POD_NAME  || 'undefined'}</div>
+          <div>Frontend Node Name: {window._env_.FRONTEND_NODE_NAME || 'undefined'}</div>
+        </div>
       </section>
     </div>
   );
