@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: backend-deployment
 spec:
-  replicas: 1
+  replicas: 3
   selector: 
     matchLabels:
       app: backend
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: gregorafc/kube-project-backend:1.0
+          image: gregorafc/kube-project-backend:2.0
           volumeMounts:
             - mountPath: /app/storage
               name: backend-data-volume
@@ -30,4 +30,4 @@ spec:
       volumes:
         - name: backend-data-volume
           persistentVolumeClaim:
-            claimName: backend-pvc
+            claimName: backend-pvc-sc

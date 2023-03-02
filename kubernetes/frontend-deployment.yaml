@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: gregorafc/kube-project-frontend:1.0
+          image: gregorafc/kube-project-frontend:2.0
           volumeMounts:
             - mountPath: /etc/nginx/conf.d
               readOnly: true
