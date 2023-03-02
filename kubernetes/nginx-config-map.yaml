@@ -2,10 +2,11 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: nginx-conf
+  namespace: akademia
 data:
   nginx.conf: |
     upstream container-backend {
-    server backend-service.default:3000;
+    server backend-service.akademia:3000;
     }
 
     server {

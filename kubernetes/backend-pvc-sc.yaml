@@ -2,6 +2,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: backend-pvc-sc
+  namespace: akademia
 spec:
   accessModes:
   - ReadWriteMany
