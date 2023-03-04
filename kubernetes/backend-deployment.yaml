@@ -4,10 +4,15 @@ metadata:
   name: backend-deployment
   namespace: akademia
 spec:
-  replicas: 2
+  replicas: 6
   selector: 
     matchLabels:
       app: backend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 2
   template:
     metadata:
       labels:
