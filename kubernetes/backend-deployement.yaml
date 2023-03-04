@@ -4,7 +4,7 @@ metadata:
   name: backend-deployment
   namespace: akademia
 spec:
-  replicas: 3
+  replicas: 2
   selector: 
     matchLabels:
       app: backend
@@ -28,6 +28,13 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
       volumes:
         - name: backend-data-volume
           persistentVolumeClaim:
